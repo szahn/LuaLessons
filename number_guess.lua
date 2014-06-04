@@ -1,5 +1,3 @@
-print "Guess a number"
-
 --Declare a basic function
 function getRandomNumber(maxValue)
 	math.randomseed(os.time()) --initialize the random number generator with a seed
@@ -7,24 +5,33 @@ function getRandomNumber(maxValue)
 	return math.random(maxValue)
 end
 
-local rand_num = getRandomNumber(100)
 
+--Variadic function
+function handleGuesses(...)
+	lowMessage, highMessage, number = ...
 
---Keep asking for a number until it matches the random number
-while answer ~= rand_num do
+	--Keep asking for a number until it matches the random number
+	while answer ~= number do
 
-	local answer = io.read("*n") --read number from std input
+		local answer = io.read("*n") --read number from std input
 
-	if answer < rand_num then
-		print "Too low"
-	elseif answer > rand_num then
-		print "Too high"
-	else
-		break
+		if answer < number then
+			print (lowMessage)
+		elseif answer > number then
+			print (highMessage)
+		else
+			break
+		end
+
+		print "Guess again"
+
 	end
-
-	print "Guess again"
 
 end
 
-print("Number was "..rand_num)
+local randNum = getRandomNumber(100)
+
+print "Guess a number"
+handleGuesses("Too low", "Too high", randNum);
+
+print("Number was "..randNum)
