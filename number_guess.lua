@@ -1,14 +1,19 @@
 print "Guess a number"
 
-math.randomseed(os.time()) --initialize the random number generator with a seed
-math.random()
+--Declare a basic function
+function getRandomNumber(maxValue)
+	math.randomseed(os.time()) --initialize the random number generator with a seed
+	math.random()
+	return math.random(maxValue)
+end
 
-rand_num = math.random(100)
+local rand_num = getRandomNumber(100)
+
 
 --Keep asking for a number until it matches the random number
 while answer ~= rand_num do
 
-	answer = io.read("*n") --read number from std input
+	local answer = io.read("*n") --read number from std input
 
 	if answer < rand_num then
 		print "Too low"
